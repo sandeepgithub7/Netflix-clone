@@ -38,3 +38,15 @@ jobs:
         env:
          DOCKER_CLI_ACI: 1
 
+  deploy:    
+    needs: deploy-to-container
+    runs-on: [sandy]  
+    steps:
+       - name: Pull the docker image
+         run: docker pull sandeeepdocker7/netflix2:latest
+       - name: Trivy image scan
+         run: trivy image sandeeepdocker7/netflix2:latest
+       - name: Run the container netflix
+         run: docker run -d --name netflix -p 8081:80 sandeeepdocker7/netflix2:latest
+
+
