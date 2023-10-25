@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  build:
+  build-analyze-scan:
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
          DOCKER_CLI_ACI: 1
 
   deploy:    
-    needs: deploy-to-container
+    needs: build-analyze-scan
     runs-on: [sandy]  
     steps:
        - name: Pull the docker image
